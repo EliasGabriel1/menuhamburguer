@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <title>Document</title>
+    <style>
+   .side-menu-wrapper { /* style menu wrapper */
+	background: rgba(0,0,0,.95);
+    background: rgba(0,0,0,.95);
+    padding: 40px 40px 0 0;
+	position: fixed; /* Fixed position */
+	top: 0;
+    align-items: end;
+    flex-direction: column;
+    display: flex;
+	left: 0; /* Sidebar initial position. "right" for right positioned menu */
+	height: 100%;
+	z-index: 2;
+	transition: 0.5s; /* CSS transition speed */
+	width: 250px;
+	font: 20px "Courier New", Courier, monospace;
+	box-sizing: border-box;
+}
+.side-menu-wrapper > ul{ /* css ul list style */
+	list-style:none;
+	padding:0;
+	margin:0;
+    overflow-y: auto; /* enable scroll for menu items */
+	height:95%;
+}
+.side-menu-wrapper > ul > li > a { /* links */
+    display: block;
+    border-bottom: 1px solid #131313;
+    padding: 6px 4px 6px 4px;
+    color: #989898;
+    transition: 0.3s;
+	text-decoration: none;
+}
+.side-menu-wrapper > a.menu-close { /* close button */
+    padding: 8px 0 4px 23px;
+    color: #6B6B6B;
+    display: block;
+    margin: -30px 0 -10px -20px;
+    font-size: 35px;
+    text-decoration: none;
+}
+
+.menu-overlay { /* overlay */
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.7);
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.container{
+  height: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+#checkbox-menu{
+  position: absolute;
+  opacity: 0;
+}
+
+label{
+  cursor: pointer;
+  position: relative;
+  display: block;
+  height: 22px;
+  width: 30px;
+}
+
+label span{
+  position: absolute;
+  display: block;
+  height: 5px;
+  width: 100%;
+  border-radius: 30px;
+  background: #f16234;
+  transition: 0.25s ease-in-out;
+}
+
+label span:nth-child(1){
+  top: 0;
+}
+
+label span:nth-child(2){
+  top: 8px;
+}
+
+label span:nth-child(3){
+  top: 16px;
+}
+
+#checkbox-menu:checked + label span:nth-child(1){
+  transform: rotate(-45deg);
+  top: 8px;
+}
+
+#checkbox-menu:checked + label span:nth-child(2){
+  opacity: 0;
+}
+
+#checkbox-menu:checked + label span:nth-child(3){
+  transform: rotate(45deg);
+  top:8px;
+}
+    </style>
+</head>
+<body>
+    <div class="menu-overlay"></div>
+    <a href="#" class="menu-open">
+        <div class="container">
+            <input type="checkbox" id="checkbox-menu">
+        
+            <label for="checkbox-menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+         
+          </div>
+    </a>
+    
+    <div class="side-menu-wrapper">
+    <a href="#" class="menu-close">
+        <div class="container">
+            <input type="checkbox" id="checkbox-menu" checked>
+        
+            <label for="checkbox-menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </label>
+         
+          </div>
+    </a>
+    <ul>
+        <li><a href="http://www.google.com" target="_blank" rel="nofollow">Google Search</a></li>
+        <li><a href="http://www.yahoo.com" target="_blank" rel="nofollow">Yahoo Search</a></li>
+        <li><a href="http://www.facebook.com" target="_blank" rel="nofollow">Facebook</a></li>
+        <li><a href="http://www.flickr.com" target="_blank" rel="nofollow">Flickr</a></li>
+    
+    </ul>
+    </div>
+    
+    <script>
+var slide_wrp 		= ".side-menu-wrapper"; //Menu Wrapper
+var open_button 	= ".menu-open"; //Menu Open Button
+var close_button 	= ".menu-close"; //Menu Close Button
+var overlay 		= ".menu-overlay"; //Overlay
+
+$(slide_wrp).hide().css( {"left": -$(slide_wrp).outerWidth()+'px'}).delay(50).queue(function(){$(slide_wrp).show()}); 
+
+$(open_button).click(function(e){
+	e.preventDefault();
+	$(slide_wrp).css( {"left": "0px"});
+	setTimeout(function(){
+		$(slide_wrp).addClass('active');
+	},50);
+	$(overlay).css({"opacity":"1", "width":"100%"});
+});
+
+$(close_button).click(function(e){
+	e.preventDefault();
+	$(slide_wrp).css( {"left": -$(slide_wrp).outerWidth()+'px'});
+	setTimeout(function(){
+		$(slide_wrp).removeClass('active');
+	},50);
+	$(overlay).css({"opacity":"0", "width":"0"});
+});
+
+$(document).on('click', function(e) {
+	if (!e.target.closest(slide_wrp) && $(slide_wrp).hasClass("active")){
+		$(slide_wrp).css( {"left": -$(slide_wrp).outerWidth()+'px'}).removeClass('active');
+		$(overlay).css({"opacity":"0", "width":"0"});
+	}
+});
+    </script>
+</body>
+</html>
