@@ -44,12 +44,9 @@
 .side-menu-wrapper > a.menu-close { /* close button */
     padding: 8px 0 4px 23px;
     color: #6B6B6B;
-    width: 100%;
-    display: flex;
+    display: block;
     font-size: 35px;
     text-decoration: none;
-    align-items: end;
-    justify-content: end;
 }
 
 .menu-overlay { /* overlay */
@@ -129,6 +126,14 @@ label span:nth-child(3){
   transform: rotate(45deg);
   top:8px;
 }
+.button{
+    display: flex;
+    display: -webkit-flex;
+    align-items: end;
+    -webkit-align-items: end;
+    -webkit-justify-content: end;
+    justify-content: end;
+}
     </style>
 </head>
 <body>
@@ -147,18 +152,20 @@ label span:nth-child(3){
     </a>
     
     <div class="side-menu-wrapper">
-    <a href="#" class="menu-close">
-        <div class="container-2">
-            <input type="checkbox" id="checkbox-menu" checked>
-        
-            <label for="checkbox-menu">
-              <span></span>
-              <span></span>
-              <span></span>
-            </label>
-         
-          </div>
-    </a>
+    <div class="button">
+        <a href="#" class="menu-close">
+            <div class="container-2">
+                <input type="checkbox" id="checkbox-menu" checked>
+            
+                <label for="checkbox-menu">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </label>
+             
+              </div>
+        </a>
+    </div>
     <ul>
         <li><a href="http://www.google.com" target="_blank" rel="nofollow">Google Search</a></li>
         <li><a href="http://www.yahoo.com" target="_blank" rel="nofollow">Yahoo Search</a></li>
